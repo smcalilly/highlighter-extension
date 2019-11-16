@@ -1,32 +1,45 @@
-// chrome.browserAction.onClicked.addListener(function(tab) {
-//   // Send a message to the active tab
-//   chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-//     let activeTab = tabs[0];
-//     chrome.tabs.sendMessage(activeTab.id, {"message": "clicked_browser_action"});
-//   });
-// });
-
-// chrome.runtime.onMessage.addListener(
-//   function(request, sender, sendResponse) {
-//     if( request.message === "open_new_tab" ) {
-//       chrome.tabs.create({"url": request.url});
-//     }
-//   }
-// );
-
-console.log('i run')
-
-function captureHighlight(highlight, tab) {
+function captureHighlight(selection, tab) {
   console.log('captureHighlight')
-  console.log(highlight);
-  console.log(highlight.selectionText)
-  let highlighted = highlight.selectionText
-  chrome.storage.local.set({"highlight": highlight});
+  console.log(selection);
+  console.log(selection.selectionText)
 
-  chrome.storage.local.get(["highlight"], function(result) {
-    console.log(result);
-    console.log('value is ' + result.highlight);
-  })
+  const highlight = {
+      text: selection.selectionText, 
+      url: selection.pageUrl
+  }
+
+  return highlight;
+
+  // chrome.storage.local.set({"highlight": highlight});
+
+  // chrome.storage.local.get(["highlight"], function(result) {
+  //   console.log(result);
+  //   console.log('value is ' + result.highlight);
+  // })
+}
+
+async function postHighlight(highlight) {
+  console.log('post highlight')
+  console.log(highlight)
+
+  let formData = new FormData();
+  formData.append('highlight', JSON.stringify(highlight));
+  console.log(formData)
+  // Object.keys(highlight).forEach(key => {
+  //   formData.append(key, highlight[key])
+  // })
+  
+  
+
+  console.log(highlight.text)
+  console.log(highlight.url)
+
+  const response = await fetch('http://localhost:3000/highlights', {
+    method: 'POST',
+    body: formData,
+  });
+
+  return await response.json();
 }
 
 chrome.runtime.onInstalled.addListener(function() {
@@ -38,7 +51,12 @@ chrome.runtime.onInstalled.addListener(function() {
 })
 
 chrome.contextMenus.onClicked.addListener(function(selection) {
-  captureHighlight(selection)
+  try {
+    const highlight = captureHighlight(selection)
+    postHighlight(highlight);
+  } catch {
+    console.log(error);
+  }
 });
 
 chrome.runtime.onInstalled.addListener(function() {
