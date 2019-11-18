@@ -1,2 +1,2 @@
 # highlighter
-this chrome extension saves highlighted text and sends it to this rails app: https://github.com/smcalilly/highlighter-rails
+this browser extension saves "highlights" or selected passages while reading on the internet. the extension sends the highlights to this rails app: https://github.com/smcalilly/highlighter-rails
