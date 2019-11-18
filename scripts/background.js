@@ -1,26 +1,10 @@
-// const RailsRanger = require('node_modules/rails-ranger')
-
-// const railsAPI = new RailsRanger({
-//   axios: {
-//     baseURL: 'http://localhost:3000/',
-//     headers: {
-//       'Content-Type': 'application/json',
-//       'Accept': 'application/json'
-//     }
-//   }
-// })
-
-// console.log(railsAPI);
-
-function captureHighlight(selection, tab) {
+captureHighlight = (selection, tab) => {
   const highlight = {
       text: selection.selectionText, 
       url: selection.pageUrl
   }
 
   return highlight;
-
-
 }
 
 postHighlight = (highlight) => {
@@ -44,6 +28,7 @@ chrome.runtime.onInstalled.addListener(function() {
   })
 })
 
+// capture highlight when a selction is added from the context menu
 chrome.contextMenus.onClicked.addListener(function(selection) {
   try {
     const highlight = captureHighlight(selection)
@@ -53,6 +38,7 @@ chrome.contextMenus.onClicked.addListener(function(selection) {
   }
 });
 
+// chrome setup
 chrome.runtime.onInstalled.addListener(function() {
   // replace all rules
   chrome.declarativeContent.onPageChanged.removeRules(undefined, function() {
