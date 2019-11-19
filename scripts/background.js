@@ -8,15 +8,20 @@ captureHighlight = (selection, tab) => {
 }
 
 postHighlight = (highlight) => {
-  const request = new XMLHttpRequest();
+  const jwt = localStorage.getItem('jwt')
 
-  request.open('POST', 'http://localhost:3000/highlights');
+  if (jwt == undefined) {
+    // show login/signup screen
+  } else {
+    const request = new XMLHttpRequest();
 
-  request.setRequestHeader('Access-Control-Allow-Origin', '*');
-  request.setRequestHeader('Accept', 'application/json');
-  request.setRequestHeader('Content-Type', 'application/json');
-
-  request.send(JSON.stringify({highlight: highlight}))
+    request.open('POST', 'http://localhost:3000/highlights');
+    request.setRequestHeader('Access-Control-Allow-Origin', '*');
+    request.setRequestHeader('Accept', 'application/json');
+    request.setRequestHeader('Content-Type', 'application/json');
+    request.setRequestHeader('Authorization', 'Bearer ' + jwt);
+    request.send(JSON.stringify({highlight: highlight}))
+  }
 }
 
 // add context menu and listen to text selection
@@ -29,6 +34,7 @@ chrome.runtime.onInstalled.addListener(function() {
 })
 
 // capture highlight when a selction is added from the context menu
+// and send it to the rails api
 chrome.contextMenus.onClicked.addListener(function(selection) {
   try {
     const highlight = captureHighlight(selection)

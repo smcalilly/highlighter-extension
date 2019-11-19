@@ -3,8 +3,8 @@
   "name": "Highlighter",
   "version": "0.1",
   "browser_action": {
-    "default_icon": "assets/icon.png",
-    "default_popup": "popup.html"
+    "default_popup": "login.html",
+    "default_icon": "assets/icon.png"
   },
   "background": {
     "scripts": ["scripts/background.js"],
