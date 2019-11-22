@@ -3,8 +3,8 @@
   "name": "Highlighter",
   "version": "0.1",
   "browser_action": {
-    "default_popup": "login.html",
-    "default_icon": "assets/icon.png"
+    "default_popup": "html/login.html",
+    "default_icon": "images/icon.png"
   },
   "background": {
     "scripts": ["scripts/background.js"],
@@ -13,6 +13,8 @@
   "permissions": [
     "contextMenus",
     "storage",
-    "http://localhost:3000/highlights"
+    "http://localhost:3000/*",
+    "https://high-lighter.herokuapp.com/*",
+    "http://high-lighter.herokuapp.com/*"
   ]
 }

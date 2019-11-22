@@ -8,10 +8,11 @@ captureHighlight = (selection, tab) => {
 }
 
 postHighlight = (highlight) => {
-  const jwt = localStorage.getItem('jwt')
+  const jwt = localStorage.getItem('jwt');
 
   if (jwt == undefined) {
-    // show login/signup screen
+    // show login/signup screen -- this logic shouldn't live here.
+    // "sign up to save highlights or *email your highlights to yourself. (we'll remind you to sign up only once, then delete your email.)"
   } else {
     const request = new XMLHttpRequest();
 
@@ -20,7 +21,7 @@ postHighlight = (highlight) => {
     request.setRequestHeader('Accept', 'application/json');
     request.setRequestHeader('Content-Type', 'application/json');
     request.setRequestHeader('Authorization', 'Bearer ' + jwt);
-    request.send(JSON.stringify({highlight: highlight}))
+    request.send(JSON.stringify({highlight: highlight}));
   }
 }
 
@@ -30,14 +31,14 @@ chrome.runtime.onInstalled.addListener(function() {
     "id": "addHighlight",
     "title": "Add Highlight",
     "contexts": ["selection"]
-  })
+  });
 })
 
 // capture highlight when a selction is added from the context menu
 // and send it to the rails api
 chrome.contextMenus.onClicked.addListener(function(selection) {
   try {
-    const highlight = captureHighlight(selection)
+    const highlight = captureHighlight(selection);
     postHighlight(highlight);
   } catch {
     console.log(error);

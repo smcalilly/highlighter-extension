@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
 }, false);
 
 captureLoginForm = () => {
+  event.preventDefault();
   const email = document.getElementById('email').value;
   const password = document.getElementById('password').value;
 
@@ -22,6 +23,8 @@ postLogin = (form) => {
   request.setRequestHeader('Access-Control-Allow-Origin', '*');
   request.setRequestHeader('Accept', 'application/json');
   request.setRequestHeader('Content-Type', 'application/json');
+
+  console.log(form);
   request.send(JSON.stringify({user: form}));
 
   // set the jwt
