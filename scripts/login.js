@@ -1,4 +1,5 @@
 captureLoginForm = () => {
+  console.log('form captured')
   const email = document.getElementById('email').value;
   const password = document.getElementById('password').value;
 
@@ -7,6 +8,8 @@ captureLoginForm = () => {
     password: password,
     remember_me: 1
   }
+
+  console.log('loginForm', loginForm);
 
   postLogin(loginForm);
 }
@@ -30,6 +33,16 @@ postLogin = (form) => {
   }
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-  document.getElementById('submitButton').addEventListener('click', captureLoginForm, false);
-}, false);
+// listen for the login html to load to the popup's dom
+const targetNode = document.getElementsByClassName('app');
+const config = { childList: true };
+const callback = function(mutationsList, observer) {
+  for (let mutation of mutationsList) {
+    if (mutation.type === 'childList') {
+      document.getElementById('submitButton').addEventListener('click', captureLoginForm, false);
+    }
+  }
+};
+
+const observer = new MutationObserver(callback);
+observer.observe(targetNode[0], config);
