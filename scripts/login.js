@@ -1,5 +1,4 @@
 captureLoginForm = () => {
-  console.log('form captured')
   const email = document.getElementById('email').value;
   const password = document.getElementById('password').value;
 
@@ -8,8 +7,6 @@ captureLoginForm = () => {
     password: password,
     remember_me: 1
   }
-
-  console.log('loginForm', loginForm);
 
   postLogin(loginForm);
 }
@@ -29,8 +26,15 @@ postLogin = (form) => {
     if (request.readyState == XMLHttpRequest.DONE) {
       const jwtToken = JSON.parse(request.response)
       localStorage.setItem('jwt', jwtToken.auth_token)
+    } else {
+      // form validation
     }
   }
+}
+
+routeToEmailForm = () => {
+  const div = document.getElementsByClassName('app');
+  loadHighlightScreen(div);
 }
 
 // listen for the login html to load to the popup's dom
@@ -40,6 +44,7 @@ const callback = function(mutationsList, observer) {
   for (let mutation of mutationsList) {
     if (mutation.type === 'childList') {
       document.getElementById('submitButton').addEventListener('click', captureLoginForm, false);
+      document.getElementById('emailForm').addEventListener('click', routeToEmailForm, false);
     }
   }
 };
