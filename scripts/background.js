@@ -8,12 +8,6 @@ captureHighlight = (selection, tab) => {
 }
 
 postHighlight = (highlight) => {
-  const jwt = localStorage.getItem('jwt');
-
-  if (jwt == undefined) {
-    // show login/signup screen -- this logic shouldn't live here.
-    // "sign up to save highlights or *email your highlights to yourself. (we'll remind you to sign up only once, then delete your email.)"
-  } else {
     const request = new XMLHttpRequest();
 
     request.open('POST', 'http://localhost:3000/highlights');
@@ -22,7 +16,6 @@ postHighlight = (highlight) => {
     request.setRequestHeader('Content-Type', 'application/json');
     request.setRequestHeader('Authorization', 'Bearer ' + jwt);
     request.send(JSON.stringify({highlight: highlight}));
-  }
 }
 
 // add context menu and listen to text selection
@@ -36,12 +29,19 @@ chrome.runtime.onInstalled.addListener(function() {
 
 // capture highlight when a selction is added from the context menu
 // and send it to the rails api
-chrome.contextMenus.onClicked.addListener(function(selection) {
-  try {
-    const highlight = captureHighlight(selection);
+chrome.contextMenus.onClicked.addListener(function (selection) {
+  const highlight = captureHighlight(selection);
+  const jwt = localStorage.getItem('jwt');
+
+  if (jwt == null) {
+    console.log('jwt is null');
+    //const div = document.getElementsByClassName('app');
+    //loadLoginScreen(div);
+    window.open('ui/index.html', 'extension_popup', 'width=300,height=400,status=no,scrollbars=yes,resizable=no');
+    // show login/signup screen -- this logic shouldn't live here.
+    // "sign up to save highlights or *email your highlights to yourself. (we'll remind you to sign up only once, then delete your email.)"
+  } else {
     postHighlight(highlight);
-  } catch {
-    console.log(error);
   }
 });
 
