@@ -45,6 +45,8 @@ chrome.contextMenus.onClicked.addListener(function (selection) {
   }
 });
 
+// test
+
 // chrome setup
 chrome.runtime.onInstalled.addListener(function() {
   // replace all rules
