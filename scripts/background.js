@@ -11,12 +11,29 @@ postHighlight = (highlight) => {
     const jwt = localStorage.getItem('highlighterJWT');
     const request = new XMLHttpRequest();
     
-    request.open('POST', 'https://high-lighter.herokuapp.com/highlights');
+    request.open('POST', 'https://www.highlighter.online/highlights');
     request.setRequestHeader('Access-Control-Allow-Origin', '*');
     request.setRequestHeader('Accept', 'application/json');
     request.setRequestHeader('Content-Type', 'application/json');
     request.setRequestHeader('Authorization', 'Bearer ' + jwt);
     request.send(JSON.stringify({highlight: highlight}));
+
+    request.onreadystatechange = function() {
+      if (request.readyState == XMLHttpRequest.DONE && request.status == 201) {
+        saveSuccessNotification();
+      }
+    }
+}
+
+function saveSuccessNotification() {
+  const options = {
+    type: "basic",
+    iconUrl: "images/yellow-box.png",
+    title: "Highlight saved!",
+    message: "Keeping on reading.",
+  }
+
+  chrome.notifications.create(options);
 }
 
 // add context menu and listen to text selection

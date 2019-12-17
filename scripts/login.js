@@ -28,7 +28,7 @@ captureLoginForm = () => {
 postLogin = async (form) => {
   const request = new XMLHttpRequest();
 
-  request.open('POST', 'https://high-lighter.herokuapp.com/authenticate');
+  request.open('POST', 'https://www.highlighter.online/authenticate');
   request.setRequestHeader('Access-Control-Allow-Origin', '*');
   request.setRequestHeader('Accept', 'application/json');
   request.setRequestHeader('Content-Type', 'application/json');
@@ -40,6 +40,7 @@ postLogin = async (form) => {
       const jwtToken = JSON.parse(request.response);
       localStorage.setItem('highlighterJWT', jwtToken.auth_token);
 
+      //oginSuccessNotification();
       navigate('authenticated');
       window.setTimeout(window.close, 1000)
       //window.close();
@@ -50,9 +51,10 @@ postLogin = async (form) => {
   }
 }
 
-function successNotification() {
+function loginSuccessNotification() {
   const options = {
     type: "basic",
+    iconUrl: "images/yellow-box.png",
     title: "Log in successful!",
     message: "Keeping on reading.",
   }
@@ -60,6 +62,11 @@ function successNotification() {
   chrome.notifications.create(options);
 }
 
+function redirectToApp() {
+  chrome.tabs.create({ url: 'https://www.highlighter.online/users/sign_up' });
+}
+
 document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('submitButton').addEventListener('click', captureLoginForm, false);
+  document.getElementById('signUp').addEventListener('click', redirectToApp, false);
 });

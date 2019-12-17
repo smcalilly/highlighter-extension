@@ -13,8 +13,11 @@
   "permissions": [
     "contextMenus",
     "storage",
+    "notifications",
     "http://localhost:3000/*",
     "https://high-lighter.herokuapp.com/*",
-    "http://high-lighter.herokuapp.com/*"
+    "http://high-lighter.herokuapp.com/*",
+    "https://www.highlighter.online/",
+    "http://www.highlighter.online/"
   ]
 }
