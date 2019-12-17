@@ -31,22 +31,15 @@ chrome.runtime.onInstalled.addListener(function() {
 // capture highlight when a selction is added from the context menu
 // and send it to the rails api
 chrome.contextMenus.onClicked.addListener(function (selection) {
-  const highlight = captureHighlight(selection);
-  postHighlight(highlight);
+  const jwt = localStorage.getItem('highlighterJWT');
 
-  // if (jwt == null) {
-  //   console.log('jwt is null');
-  //   //const div = document.getElementsByClassName('app');
-  //   //loadLoginScreen(div);
-  //   //window.open('ui/index.html', 'extension_popup', 'width=300,height=400,status=no,scrollbars=yes,resizable=no');
-  //   // show login/signup screen -- this logic shouldn't live here.
-  //   // "sign up to save highlights or *email your highlights to yourself. (we'll remind you to sign up only once, then delete your email.)"
-  // } else {
-  //   postHighlight(highlight);
-  // }
+  if (jwt == null) {
+    window.open('ui/newIndex.html', 'extension_popup', 'width=300,height=400,status=no,scrollbars=yes,resizable=no');
+  } else {
+    const highlight = captureHighlight(selection);
+    postHighlight(highlight);
+  }
 });
-
-// test
 
 // chrome setup
 chrome.runtime.onInstalled.addListener(function() {
