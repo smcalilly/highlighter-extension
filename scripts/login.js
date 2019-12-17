@@ -41,10 +41,23 @@ postLogin = async (form) => {
       localStorage.setItem('highlighterJWT', jwtToken.auth_token);
 
       navigate('authenticated');
+      window.setTimeout(window.close, 1000)
+      //window.close();
+      //successNotification();
     } else if (request.status !== 200){
       loginFailure();
     }
   }
+}
+
+function successNotification() {
+  const options = {
+    type: "basic",
+    title: "Log in successful!",
+    message: "Keeping on reading.",
+  }
+
+  chrome.notifications.create(options);
 }
 
 document.addEventListener('DOMContentLoaded', function() {

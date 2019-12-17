@@ -4,7 +4,7 @@
   "version": "0.1",
   "browser_action": {
     "default_popup": "ui/newIndex.html",
-    "default_icon": "images/icon.png"
+    "default_icon": "images/yellow-box.png"
   },
   "background": {
     "scripts": ["scripts/background.js"],
