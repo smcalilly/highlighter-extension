@@ -1,6 +1,16 @@
+loginFailure = () => {
+  document.getElementById('loginForm').reset();
+  navigate('error');
+}
+
 captureLoginForm = () => {
   const email = document.getElementById('email').value;
   const password = document.getElementById('password').value;
+
+  if (email.length === 0 || password.length === 0) {
+    loginFailure();
+    return;
+  }
 
   const loginForm = {
     email: email,
@@ -8,10 +18,14 @@ captureLoginForm = () => {
     remember_me: 1
   }
 
-  postLogin(loginForm);
+  try {
+    postLogin(loginForm);
+  } catch {
+    loginFailure();
+  }
 }
 
-postLogin = (form) => {
+postLogin = async (form) => {
   const request = new XMLHttpRequest();
 
   request.open('POST', 'http://localhost:3000/authenticate');
@@ -21,33 +35,18 @@ postLogin = (form) => {
 
   request.send(JSON.stringify({user: form}));
 
-  // set the jwt
   request.onreadystatechange = function() {
-    if (request.readyState == XMLHttpRequest.DONE) {
-      const jwtToken = JSON.parse(request.response)
-      localStorage.setItem('jwt', jwtToken.auth_token)
-    } else {
-      // form validation
+    if (request.readyState == XMLHttpRequest.DONE && request.status == 200) {
+      const jwtToken = JSON.parse(request.response);
+      localStorage.setItem('highlighterJWT', jwtToken.auth_token);
+
+      navigate('authenticated');
+    } else if (request.status !== 200){
+      loginFailure();
     }
   }
 }
 
-routeToEmailForm = () => {
-  const div = document.getElementsByClassName('app');
-  loadHighlightScreen(div);
-}
-
-// listen for the login html to load to the popup's dom
-const targetNode = document.getElementsByClassName('app');
-const config = { childList: true };
-const callback = function(mutationsList, observer) {
-  for (let mutation of mutationsList) {
-    if (mutation.type === 'childList') {
-      document.getElementById('submitButton').addEventListener('click', captureLoginForm, false);
-      document.getElementById('emailForm').addEventListener('click', routeToEmailForm, false);
-    }
-  }
-};
-
-const observer = new MutationObserver(callback);
-observer.observe(targetNode[0], config);
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('submitButton').addEventListener('click', captureLoginForm, false);
+});

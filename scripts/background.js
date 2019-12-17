@@ -8,8 +8,9 @@ captureHighlight = (selection, tab) => {
 }
 
 postHighlight = (highlight) => {
+    const jwt = localStorage.getItem('highlighterJWT');
     const request = new XMLHttpRequest();
-
+    
     request.open('POST', 'http://localhost:3000/highlights');
     request.setRequestHeader('Access-Control-Allow-Origin', '*');
     request.setRequestHeader('Accept', 'application/json');
@@ -31,18 +32,18 @@ chrome.runtime.onInstalled.addListener(function() {
 // and send it to the rails api
 chrome.contextMenus.onClicked.addListener(function (selection) {
   const highlight = captureHighlight(selection);
-  const jwt = localStorage.getItem('jwt');
+  postHighlight(highlight);
 
-  if (jwt == null) {
-    console.log('jwt is null');
-    //const div = document.getElementsByClassName('app');
-    //loadLoginScreen(div);
-    window.open('ui/index.html', 'extension_popup', 'width=300,height=400,status=no,scrollbars=yes,resizable=no');
-    // show login/signup screen -- this logic shouldn't live here.
-    // "sign up to save highlights or *email your highlights to yourself. (we'll remind you to sign up only once, then delete your email.)"
-  } else {
-    postHighlight(highlight);
-  }
+  // if (jwt == null) {
+  //   console.log('jwt is null');
+  //   //const div = document.getElementsByClassName('app');
+  //   //loadLoginScreen(div);
+  //   //window.open('ui/index.html', 'extension_popup', 'width=300,height=400,status=no,scrollbars=yes,resizable=no');
+  //   // show login/signup screen -- this logic shouldn't live here.
+  //   // "sign up to save highlights or *email your highlights to yourself. (we'll remind you to sign up only once, then delete your email.)"
+  // } else {
+  //   postHighlight(highlight);
+  // }
 });
 
 // test

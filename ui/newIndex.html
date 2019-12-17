@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" type="text/css" href="newstyles.css" />
+</head>
+
+<body>
+
+	<div id="app">
+			<div id="login" class="centerColumn page active">
+					<div class="centerColumn">
+						<h1>Highlighter</h1>
+						<h2>Login</h2>
+		
+						<form id="loginForm" action="http://localhost:3000/authenticate">
+							<div id="form">
+								<label>email:</label>
+								<input type="text" id="email"><br />
+								<label>password:</label>
+								<input type="password" id="password">
+							</div>
+							<br>
+							<button type="button" id="submitButton">Login</button>
+						</form>
+						<div class="status">
+								<div id="error" class="page"><p><strong>Bad username / password!</strong></p></div>
+						</div>
+						<br />
+						<div>
+							<p><a href="http://localhost:3000/user/sign_up">Sign up</a>
+								or <a href='#email' id="emailForm">email highlights</a> to yourself.</p>
+						</div>
+					</div>
+			</div>
+	</div>
+  
+
+  <div id="user" class="page">
+    <h1>Successful!</h1>
+    <div id="success-message"></div>
+  </div>
+
+  <div id="error" class="page">
+      <h1>Error!</h1>
+      <div id="error-message"></div>
+    </div>
+
+  <script src="/scripts/home.js"></script>
+  <script src="/scripts/login.js"></script>
+</body>
+
+</html>
