@@ -24,8 +24,6 @@ const token = localStorage.getItem('highlighterJWT');
 // }
 
 function navigate(state = 'login') {
-
-  console.log(state);
   let currentPage = '';
 
   if (state === 'error') {
