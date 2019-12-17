@@ -11,7 +11,7 @@ postHighlight = (highlight) => {
     const jwt = localStorage.getItem('highlighterJWT');
     const request = new XMLHttpRequest();
     
-    request.open('POST', 'http://localhost:3000/highlights');
+    request.open('POST', 'https://high-lighter.herokuapp.com/highlights');
     request.setRequestHeader('Access-Control-Allow-Origin', '*');
     request.setRequestHeader('Accept', 'application/json');
     request.setRequestHeader('Content-Type', 'application/json');
