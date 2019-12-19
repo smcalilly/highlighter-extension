@@ -18,8 +18,8 @@ postHighlight = (highlight) => {
     request.setRequestHeader('Authorization', 'Bearer ' + jwt);
     request.send(JSON.stringify({highlight: highlight}));
 
-    request.onreadystatechange = function() {
-      if (request.readyState == XMLHttpRequest.DONE && request.status == 201) {
+    request.onload = function() {
+      if (request.status === 201) {
         saveSuccessNotification();
       }
     }
@@ -30,7 +30,7 @@ function saveSuccessNotification() {
     type: "basic",
     iconUrl: "images/yellow-box.png",
     title: "Highlight saved!",
-    message: "Keeping on reading.",
+    message: "Keep on reading.",
   }
 
   chrome.notifications.create(options);

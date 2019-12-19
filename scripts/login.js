@@ -35,8 +35,8 @@ postLogin = async (form) => {
 
   request.send(JSON.stringify({user: form}));
 
-  request.onreadystatechange = function() {
-    if (request.readyState == XMLHttpRequest.DONE && request.status == 200) {
+  request.onload = function() {
+    if (request.status === 200) {
       const jwtToken = JSON.parse(request.response);
       localStorage.setItem('highlighterJWT', jwtToken.auth_token);
 
