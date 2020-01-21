@@ -7,25 +7,13 @@ PAGES.error = {};
 PAGES.error.page = document.querySelector("#error");
 
 function render(state = 'login') {
-  let currentPage = '';
-
-  if (state === 'error') {
-    currentPage = 'error'
-  } else if (state === 'login') {
-    currentPage = 'login';
-  } else if (state === 'authenticated') {
-    currentPage = 'authenticated'
-  } else {
-    currentPage = 'notFound';
-  }
-
   for (let page in PAGES) {
     if (PAGES.hasOwnProperty(page)) {
       PAGES[page].page.classList.remove("active");
     }
   }
 
-  PAGES[currentPage].page.classList.add('active');
+  PAGES[state].page.classList.add('active');
 }
 
 document.addEventListener('DOMContentLoaded', function() {
