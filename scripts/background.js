@@ -8,7 +8,7 @@ function captureHighlight(selection) {
 }
 
 async function postFetch(highlight, jwt) {
-  let url = 'http://localhost:3000/highlights';
+  const url = 'http://localhost:3000/highlights';
 
   const response = await fetch(url, {
     method: 'POST',
@@ -48,8 +48,6 @@ function errorMessage(error) {
   }
 
   chrome.notifications.create(message);
-
-  // send error to server
 }
 
 // add context menu and listen to text selection
@@ -61,12 +59,13 @@ chrome.runtime.onInstalled.addListener(function() {
   });
 });
 
-// capture highlight when a selction is added from the context menu
-// and send it to the rails api
+// capture highlight and send it to the api
 chrome.contextMenus.onClicked.addListener(function (selection) {
   const jwt = localStorage.getItem('highlighterJWT');
 
   if (jwt == null) {
+    // chrome won't allow popup to open programmatically
+    // so open a small login window
     window.open(
       'ui/newIndex.html', 
       'extension_popup', 
