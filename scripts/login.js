@@ -33,26 +33,6 @@ function postLogin(form) {
   }
 }
 
-async function fetchLogin(form) {
-  const url = 'http://localhost:3000/authenticate';
-
-  const response = await fetch(url, {
-    method: 'POST',
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ user: form })
-  });
-
-  if (response.ok) {
-    loginSuccessful(response)
-  } else {
-    loginFailure();
-  }
-}
-
 function loginSuccessful(response) {
   const jwtToken = JSON.parse(response);
   localStorage.setItem('highlighterJWT', jwtToken.auth_token);
