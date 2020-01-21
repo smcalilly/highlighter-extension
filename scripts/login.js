@@ -1,9 +1,4 @@
-loginFailure = () => {
-  document.getElementById('loginForm').reset();
-  navigate('error');
-}
-
-captureLoginForm = () => {
+function captureLoginForm() {
   const email = document.getElementById('email').value;
   const password = document.getElementById('password').value;
 
@@ -18,48 +13,60 @@ captureLoginForm = () => {
     remember_me: 1
   }
 
-  try {
-    postLogin(loginForm);
-  } catch {
-    loginFailure();
-  }
+  postLogin(loginForm);
 }
 
-postLogin = async (form) => {
+function postLogin(form) {
   const request = new XMLHttpRequest();
-
-  request.open('POST', 'https://www.highlighter.online/authenticate');
+  request.open('POST', 'http://localhost:3000/authenticate');
   request.setRequestHeader('Access-Control-Allow-Origin', '*');
   request.setRequestHeader('Accept', 'application/json');
   request.setRequestHeader('Content-Type', 'application/json');
-
-  request.send(JSON.stringify({user: form}));
+  request.send(JSON.stringify({ user: form }));
 
   request.onload = function() {
     if (request.status === 200) {
-      const jwtToken = JSON.parse(request.response);
-      localStorage.setItem('highlighterJWT', jwtToken.auth_token);
-
-      //oginSuccessNotification();
-      navigate('authenticated');
-      window.setTimeout(window.close, 1000)
-      //window.close();
-      //successNotification();
+      loginSuccessful(request.response)
     } else if (request.status !== 200){
       loginFailure();
     }
   }
 }
 
-function loginSuccessNotification() {
-  const options = {
-    type: "basic",
-    iconUrl: "images/yellow-box.png",
-    title: "Log in successful!",
-    message: "Keeping on reading.",
-  }
+async function fetchLogin(form) {
+  const url = 'http://localhost:3000/authenticate';
 
-  chrome.notifications.create(options);
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ user: form })
+  });
+
+  if (response.ok) {
+    loginSuccessful(response)
+  } else {
+    loginFailure();
+  }
+}
+
+function loginSuccessful(response) {
+  const jwtToken = JSON.parse(response);
+  localStorage.setItem('highlighterJWT', jwtToken.auth_token);
+
+  // display successful message
+  render('authenticated');
+
+  // close the popup
+  window.setTimeout(window.close, 1000);
+}
+
+function loginFailure() {
+  document.getElementById('loginForm').reset();
+  render('error');
 }
 
 function redirectToApp() {

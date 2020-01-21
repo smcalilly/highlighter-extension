@@ -1,20 +1,48 @@
-<div class="centerColumn">
-  <h2>Login</h2>
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="styles.css" />
+	<link rel="stylestheet" type="text/css" href="https://www.highlighter.online/assets/application-a274d30bdffe0ba39623c05837fa886a3eb4d209214a66447b2f5a0bd417bfbd.css"/>
+</head>
 
-  <form action="http://localhost:3000/authenticate">
-    <div id="login">
-      <label>email:</label>
-      <input type="text" id="email"><br />
-      <label>password:</label>
-      <input type="password" id="password">
-    </div>
-    <br>
-    <button type="button" id="submitButton">Login</button>
-  </form>
-  <br/>
-  <div>
-    <p><a href="http://localhost:3000/user/sign_up">Sign up</a> 
-      or <a href='#' id="emailForm">email highlights</a> to yourself.</p>
-  </div>
-</div>
-    
+<body>
+
+	<div id="app">
+			<div id="login" class="flexCenterColumn page active">
+					<div class="flexCenterColumn">
+						<h1 class='banner'>Highlighter</h1>
+						<h2>Login</h2>
+		
+						<form id="loginForm">
+							<div id="form">
+								<label>email:</label>
+								<input type="text" id="email"><br />
+								<label>password:</label>
+								<input type="password" id="password">
+							</div>
+							<br>
+							<button type="button" id="submitButton">Login</button>
+						</form>
+
+						<div class="status">
+								<div id="error" class="page">
+									<p><strong>Bad username / password!</strong></p>
+								</div>
+								<div id="authenticated" class="page">
+									<p><strong>Login successful!</strong></p>
+								</div>
+						</div>
+						<br />
+						<div>
+							<p><a id='signUp' href='#signUp'>Sign up</a>
+								or <a href='#email' id="emailForm">email highlights</a> to yourself.</p>
+						</div>
+					</div>
+			</div>
+	</div>
+
+  <script src="/scripts/home.js"></script>
+  <script src="/scripts/login.js"></script>
+</body>
+
+</html>
