@@ -30,10 +30,10 @@ async function postFetch(highlight, jwt) {
 
 function successMessage() {
   const message = {
-    type: "basic",
-    iconUrl: "images/yellow-box.png",
-    title: "Highlight saved!",
-    message: "Keep on reading.",
+    type: 'basic',
+    iconUrl: 'images/yellow-box.png',
+    title: 'Highlight saved!',
+    message: 'Keep on reading.',
   }
 
   chrome.notifications.create(message);
@@ -41,10 +41,10 @@ function successMessage() {
 
 function errorMessage(error) {
   const message = {
-    type: "basic",
-    iconUrl: "images/yellow-box.png",
+    type: 'basic',
+    iconUrl: 'images/yellow-box.png',
     title: 'Unable to save highlight',
-    message: "This shouldn't happen! Please contact us if the error persists.",
+    message: 'This should not happen! Please contact us if the error persists.',
   }
 
   chrome.notifications.create(message);
@@ -53,9 +53,9 @@ function errorMessage(error) {
 // add context menu and listen to text selection
 chrome.runtime.onInstalled.addListener(function() {
   chrome.contextMenus.create({
-    "id": "addHighlight",
-    "title": "Add Highlight",
-    "contexts": ["selection"]
+    'id': 'addHighlight',
+    'title': 'Add Highlight',
+    'contexts': ['selection']
   });
 });
 
