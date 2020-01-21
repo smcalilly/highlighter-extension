@@ -67,7 +67,7 @@ chrome.contextMenus.onClicked.addListener(function (selection) {
     // chrome won't allow popup to open programmatically
     // so open a small login window
     window.open(
-      'ui/newIndex.html', 
+      'ui/login.html', 
       'extension_popup', 
       'width=300,height=400,status=no,scrollbars=yes,resizable=no'
     );
