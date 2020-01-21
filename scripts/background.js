@@ -1,4 +1,4 @@
-async function captureHighlight(textSelection) {
+function captureHighlight(textSelection) {
   let jwt = localStorage.getItem('highlighterJWT');
   
   if (jwt == null) {
