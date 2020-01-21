@@ -1,5 +1,5 @@
 function captureHighlight(textSelection) {
-  let jwt = localStorage.getItem('highlighterJWT');
+  const jwt = localStorage.getItem('highlighterJWT');
   
   if (jwt == null) {
     const notification = {
