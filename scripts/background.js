@@ -22,7 +22,7 @@ function formatHighlight(selection) {
 }
 
 async function postHighlight(highlight, jwt) {
-  const url = 'http://localhost:3000/highlights';
+  const url = 'https://www.highlighter.online/highlights';
 
   const response = await fetch(url, {
     method: 'POST',
@@ -35,7 +35,7 @@ async function postHighlight(highlight, jwt) {
     body: JSON.stringify({ highlight: highlight })
   });
 
-  const notification = {}
+  let notification = {}
 
   if (response.ok) {
     notification = {
@@ -55,7 +55,7 @@ async function postHighlight(highlight, jwt) {
 function createNotification(notification) {
   const message = {
     type: 'basic',
-    iconUrl: 'images/yellow-box.png',
+    iconUrl: 'images/highlight-logo.png',
     title: notification.title,
     message: notification.message,
   }

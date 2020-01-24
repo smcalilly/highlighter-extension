@@ -18,7 +18,7 @@ function captureLoginForm() {
 
 function postLogin(form) {
   const request = new XMLHttpRequest();
-  request.open('POST', 'http://localhost:3000/authenticate');
+  request.open('POST', 'https://www.highlighter.online/authenticate');
   request.setRequestHeader('Access-Control-Allow-Origin', '*');
   request.setRequestHeader('Accept', 'application/json');
   request.setRequestHeader('Content-Type', 'application/json');
@@ -37,15 +37,13 @@ function loginSuccessful(response) {
   const jwtToken = JSON.parse(response);
   localStorage.setItem('highlighterJWT', jwtToken.auth_token);
 
-  // display successful message
-  render('authenticated');
+  render('successful');
 
-  // close the popup
   window.setTimeout(window.close, 1000);
 }
 
 function loginFailure() {
-  document.getElementById('loginForm').reset();
+  document.getElementById('login-form').reset();
   render('error');
 }
 
@@ -54,6 +52,6 @@ function redirectToApp() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-  document.getElementById('submitButton').addEventListener('click', captureLoginForm, false);
-  document.getElementById('signUp').addEventListener('click', redirectToApp, false);
+  document.getElementById('submit-button').addEventListener('click', captureLoginForm, false);
+  document.getElementById('sign-up').addEventListener('click', redirectToApp, false);
 });

@@ -4,7 +4,7 @@
   "version": "0.1",
   "browser_action": {
     "default_popup": "ui/login.html",
-    "default_icon": "images/yellow-box.png"
+    "default_icon": "images/highlight-logo.png"
   },
   "background": {
     "scripts": ["scripts/background.js"],
@@ -19,5 +19,10 @@
     "http://high-lighter.herokuapp.com/*",
     "https://www.highlighter.online/",
     "http://www.highlighter.online/"
-  ]
+  ],
+  "icons": {
+    "16": "images/highlight-logo.png",
+    "48": "images/highlight-logo.png",
+    "128": "images/highlight-logo.png"
+  }
 }

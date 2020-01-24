@@ -1,10 +1,14 @@
-PAGES = {};
-PAGES.login = {};
-PAGES.login.page = document.querySelector('#login');
-PAGES.authenticated = {};
-PAGES.authenticated.page = document.querySelector('#authenticated');
-PAGES.error = {};
-PAGES.error.page = document.querySelector('#error');
+PAGES = {
+  login: {
+    page: document.querySelector('#login')
+  },
+  successful: {
+    page: document.querySelector('#successful')
+  },
+  error: {
+    page: document.querySelector('#error')
+  }
+};
 
 function render(state = 'login') {
   for (let page in PAGES) {
