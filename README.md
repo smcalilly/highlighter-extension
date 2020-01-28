@@ -1,4 +1,6 @@
 # highlighter
-this browser extension saves "highlights" or selected passages while reading on the internet. the extension sends the highlights to this rails app: https://github.com/smcalilly/highlighter-rails
+This browser extension saves "highlights" or selected passages while reading in your favorite web browser. The extension sends the highlights to this Rails app: https://github.com/smcalilly/highlighter-rails
 
-i recently added jwt authentication system so a user can login and save the highlight from the extension to an account in the rails app. need to change the client authentication to a more secure setup via omniauth.
+No matter what or where you read, your highlights are always available to reference whenever you need them.
+
+Visit www.highlighter.online to sign up.
