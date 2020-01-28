@@ -1,3 +1,38 @@
+html, body, h1, p, h2, .banner {
+  font-family: Verdana, Helvetica, Arial sans-serif;
+  color: #333333;
+  background-color: aliceblue;
+}
+
+a {
+  color: #333;
+  text-decoration: underline;
+  text-decoration-color: #fcfc60;
+}
+
+a:hover, a:focus {
+  text-decoration: underline;
+  color: #fcfc60;
+  background-color: #333;
+}
+
+button {
+  width: 90px;
+  height: 35px;
+  border-radius: 10px;
+  border: 2px #333 solid;
+  color: #333;
+  background: #fcfc60;
+  margin-top: 20px;
+  font-size: 20px;
+}
+
+button:hover, button:focus {
+  color: #fff;
+  background-color: #333;
+  cursor: pointer;
+}
+
 .page {
     display: none;
   }
@@ -10,8 +45,7 @@
   width: 200px;
   height: 40px;
   margin: 20px;
-  background-color: white;
-  animation: FadeIn;
+  background-color: aliceblue;
 }
 
 .banner {
@@ -25,14 +59,26 @@
   border: 1px solid #333333;
   border-radius: 3px;
 }
+
+.login {
+  box-sizing: border-box;
+  margin-top: 12px;
+  width: 200px;
+  height: 30px;
+  padding: 5px;
+  border-radius: 1px;
+}
   
-#error {
-  color: red;
+#error p {
   text-align: center;
+  background-color: #fcfc60;
+  padding: 10px;
 }
 
-#successful {
+#successful p {
   text-align: center;
+  background-color: #fcfc60;
+  padding: 15px;
 }
   
 .flex-center-column {
@@ -41,13 +87,15 @@
   align-items: center;
   justify-content: center;
 }
-  
-@keyframes FadeIn {
-  from {
-    background-color: white;
-  }
-    
-  to {
-    background-color: yellow;
-  }
+
+/* input:invalid {
+  border: 2px dashed red;
 }
+
+input:invalid:required {
+  background-image: linear-gradient(to right, pink, lightgreen);
+}
+
+input:valid {
+  border: 2px solid black;
+} */

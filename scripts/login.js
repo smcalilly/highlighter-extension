@@ -2,11 +2,7 @@ function captureLoginForm() {
   const email = document.getElementById('email').value;
   const password = document.getElementById('password').value;
 
-  if (email.length === 0 || password.length === 0) {
-    loginFailure();
-    return;
-  }
-
+  console.log('captureloginform')
   const loginForm = {
     email: email,
     password: password,
