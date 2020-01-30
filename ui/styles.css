@@ -7,7 +7,13 @@ html, body, h1, p, h2, .banner {
 a {
   color: #333;
   text-decoration: underline;
-  text-decoration-color: #fcfc60;
+  background-color: #ffffb5;
+  font-family: verdana;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: #fcfc60;
 }
 
 a:hover, a:focus {

@@ -11,7 +11,7 @@
 					<div class='flex-center-column'>
 						<h1 class='banner'>Highlighter</h1>
 		
-						<form class='flex-center-column' id='login-form'>
+						<form class='flex-center-column' id='login-form' role='login'>
 							<div id='form'>
 								<input type='email' class='login' id='email' placeholder='email' required><br />
 								<input type='password' class='login' id='password' placeholder='password' required>
@@ -20,7 +20,7 @@
 							<button type='button' id='submit-button'>Login</button>
 						</form>
 
-						<div class='status'>
+						<div class='status' aria-live='polite'>
 								<div id='error' class='page'>
 									<p><strong>Bad username / password!</strong></p>
 								</div>

@@ -2,7 +2,6 @@ function captureLoginForm() {
   const email = document.getElementById('email').value;
   const password = document.getElementById('password').value;
 
-  console.log('captureloginform')
   const loginForm = {
     email: email,
     password: password,
@@ -22,19 +21,21 @@ function postLogin(form) {
 
   request.onload = function() {
     if (request.status === 200) {
-      loginSuccessful(request.response)
+      setAuthToken(request.response);
+      loginSuccessful();
     } else if (request.status !== 200){
       loginFailure();
     }
   }
 }
 
-function loginSuccessful(response) {
+function setAuthToken(response) {
   const jwtToken = JSON.parse(response);
   localStorage.setItem('highlighterJWT', jwtToken.auth_token);
+}
 
+function loginSuccessful(response) {
   render('successful');
-
   window.setTimeout(window.close, 1000);
 }
 
