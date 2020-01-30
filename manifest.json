@@ -10,7 +10,10 @@
     "scripts": ["scripts/background.js"],
     "persistent": false
   },
-  "context_scripts": ["scripts/contentScript.js"],
+  "content_scripts": [{
+    "matches": ["<all_urls>"],
+    "js": ["scripts/contentScript.js"]
+    }],
   "permissions": [
     "contextMenus",
     "storage",

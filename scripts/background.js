@@ -14,10 +14,18 @@ function captureHighlight(textSelection) {
 
 function formatHighlight(selection) {
   console.log(selection);
+  let highlight = {};
 
-  const highlight = {
-    text: selection.selectionText, 
-    url: selection.pageUrl
+  if (selection && selection.selectionText) {
+    highlight = {
+      text: selection.selectionText, 
+      url: selection.pageUrl
+    }
+  } else {
+    highlight = {
+      text: selection,
+      url: window.location.href
+    }
   }
 
   return highlight;
@@ -86,19 +94,21 @@ chrome.runtime.onInstalled.addListener(function() {
 
 chrome.commands.onCommand.addListener(function(command) {
 
-  chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {      
-    chrome.tabs.sendMessage(tabs[0].id, {method: "getSelection"}, function(response){               
-        console.log(response);                                                   
-    });
-  });
+  
 
   if (command === 'save-highlight') {
-    console.log(command)
-    console.log(event)
-    let selection = window.getSelection()
-    //let selectedText = selectedObject.toString();
-    console.log(selection)
-      captureHighlight(selection);
+    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {      
+      chrome.tabs.sendMessage(tabs[0].id, {method: "getSelection"}, function(response){               
+          console.log(response);  
+          captureHighlight(response.data);                                                 
+      });
+    });
+    // console.log(command)
+    // console.log(event)
+    // let selection = window.getSelection()
+    // //let selectedText = selectedObject.toString();
+    // console.log(selection)
+    //   captureHighlight(selection);
 
   }
 });
