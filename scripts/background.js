@@ -13,6 +13,8 @@ function captureHighlight(textSelection) {
 }
 
 function formatHighlight(selection) {
+  console.log(selection);
+
   const highlight = {
     text: selection.selectionText, 
     url: selection.pageUrl
@@ -67,7 +69,7 @@ function createNotification(notification) {
 chrome.runtime.onInstalled.addListener(function() {
   chrome.contextMenus.create({
     'id': 'addHighlight',
-    'title': 'Add Highlight',
+    'title': 'Save Highlight',
     'contexts': ['selection']
   });
 });
@@ -75,4 +77,28 @@ chrome.runtime.onInstalled.addListener(function() {
 // listen to contextMenu for the text selection event
 chrome.contextMenus.onClicked.addListener(function(textSelection) {
   captureHighlight(textSelection);
+});
+
+// redirect user to app's signup page upon download
+chrome.runtime.onInstalled.addListener(function() {
+  chrome.tabs.create({ url: "http://localhost:3000/users/sign_up?download=true" });
+})
+
+chrome.commands.onCommand.addListener(function(command) {
+
+  chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {      
+    chrome.tabs.sendMessage(tabs[0].id, {method: "getSelection"}, function(response){               
+        console.log(response);                                                   
+    });
+  });
+
+  if (command === 'save-highlight') {
+    console.log(command)
+    console.log(event)
+    let selection = window.getSelection()
+    //let selectedText = selectedObject.toString();
+    console.log(selection)
+      captureHighlight(selection);
+
+  }
 });

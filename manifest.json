@@ -10,6 +10,7 @@
     "scripts": ["scripts/background.js"],
     "persistent": false
   },
+  "context_scripts": ["scripts/contentScript.js"],
   "permissions": [
     "contextMenus",
     "storage",
@@ -24,5 +25,14 @@
     "16": "images/highlight-logo.png",
     "48": "images/highlight-logo.png",
     "128": "images/highlight-logo.png"
+  },
+  "commands": {
+    "save-highlight": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+H",
+        "mac": "Command+Shift+S"
+      },
+      "description": "Save Highlight"
+    }
   }
 }
