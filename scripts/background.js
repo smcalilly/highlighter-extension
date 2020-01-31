@@ -90,7 +90,6 @@ chrome.commands.onCommand.addListener(function (command) {
     chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
       chrome.tabs.sendMessage(tabs[0].id, { method: "getSelection" }, function (response) {
         // format response to pass into captureHighlight
-        console.log()
         const selection = {
           selectionText: response.data,
           pageUrl: tabs[0].url
