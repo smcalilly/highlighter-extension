@@ -18,7 +18,7 @@
     "contextMenus",
     "storage",
     "notifications",
-    "tabs",
+    "activeTab",
     "https://www.highlighter.online/"
   ],
   "icons": {
