@@ -43,15 +43,22 @@ button:hover, button:focus {
     display: none;
   }
   
-  .page.active {
-    display: block;
-  }
+.page.active {
+  display: block;
+}
   
 .status {
   width: 200px;
   height: 40px;
   margin: 20px;
   background-color: aliceblue;
+}
+
+@-moz-document url-prefix() {
+  .status {
+    margin-top: 10px;
+    margin-bottom: 45px;
+  }
 }
 
 .banner {
@@ -86,6 +93,8 @@ button:hover, button:focus {
   background-color: #fcfc60;
   padding: 15px;
 }
+
+
   
 .flex-center-column {
   display: flex;
@@ -93,15 +102,3 @@ button:hover, button:focus {
   align-items: center;
   justify-content: center;
 }
-
-/* input:invalid {
-  border: 2px dashed red;
-}
-
-input:invalid:required {
-  background-image: linear-gradient(to right, pink, lightgreen);
-}
-
-input:valid {
-  border: 2px solid black;
-} */
