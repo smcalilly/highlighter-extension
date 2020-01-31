@@ -18,11 +18,8 @@
     "contextMenus",
     "storage",
     "notifications",
-    "http://localhost:3000/*",
-    "https://high-lighter.herokuapp.com/*",
-    "http://high-lighter.herokuapp.com/*",
-    "https://www.highlighter.online/",
-    "http://www.highlighter.online/"
+    "tabs",
+    "https://www.highlighter.online/"
   ],
   "icons": {
     "16": "images/highlight-logo.png",
