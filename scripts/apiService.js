@@ -1,4 +1,4 @@
-export default class ApiService {
+class ApiService {
   constructor(token) {
     this.domain = 'http://localhost:3000';
     this.token = token;

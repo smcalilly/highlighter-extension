@@ -7,7 +7,11 @@
     "default_icon": "images/highlight-logo.png"
   },
   "background": {
-    "scripts": ["scripts/background.js"],
+    "scripts": [
+      "scripts/background.js", 
+      "scripts/apiService.js",
+      "scripts/helpers.js"
+    ],
     "persistent": false
   },
   "content_scripts": [{
