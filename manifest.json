@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Highlighter",
-  "version": "0.2",
+  "version": "0.3",
   "browser_action": {
     "default_popup": "ui/login.html",
     "default_icon": "images/highlight-logo.png"
@@ -19,7 +19,8 @@
     "storage",
     "notifications",
     "activeTab",
-    "https://www.highlighter.online/"
+    "https://www.highlighter.online/",
+    "http://www.localhost:3000/*"
   ],
   "icons": {
     "16": "images/highlight-logo.png",

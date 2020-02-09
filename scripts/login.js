@@ -13,7 +13,7 @@ function captureLoginForm() {
 
 function postLogin(form) {
   const request = new XMLHttpRequest();
-  request.open('POST', 'https://www.highlighter.online/authenticate');
+  request.open('POST', 'http://www.localhost:3000/authenticate');
   request.setRequestHeader('Access-Control-Allow-Origin', '*');
   request.setRequestHeader('Accept', 'application/json');
   request.setRequestHeader('Content-Type', 'application/json');
