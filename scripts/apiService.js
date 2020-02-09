@@ -21,6 +21,18 @@ class ApiService {
     return response;
   }
 
+  async getHighlightsForCurrentPage(params) {
+    console.log(params)
+    const url = `${this.domain}/highlights/current?url=${params}`;
+
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: this.requestHeaders,
+    });
+
+    return response;
+  }
+
   async postHighlight(requestBody) {
     const url = `${this.domain}/highlights`;
   

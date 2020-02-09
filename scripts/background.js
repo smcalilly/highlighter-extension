@@ -1,21 +1,32 @@
-async function initializeAPI() {
+function initializeAPI() {
   const token = localStorage.getItem('highlighterJWT');
-  const api = new ApiService(token);
+  const clientAPI = new ApiService(token);
+  return clientAPI;
+}
+
+chrome.webNavigation.onDOMContentLoaded.addListener(async function(url) {
+  const clientAPI = initializeAPI();
+  console.log('dom content loaded')
+
+  console.log(url)
 
   // send request to see if token is still valid for current user
-  const response = await api.getHighlights();
+  let currentPage = `url: ${url.url}`
+  const response = await clientAPI.getHighlightsForCurrentPage(currentPage);
 
-  // TODO: retrieve any highlights for the current webpage 
-  // so we can render the highlights in the popup and/or content script
+  renderApp(response, clientAPI);
+}) 
 
+function renderApp(response, clientAPI) {
   // reset auth token
   if (response.status !== 200) {
     localStorage.setItem('highligtherJWT', null);
-    api.token = null;
+    clientAPI.token = null;
     // send message to popup with login state
   }
 
-  return api;
+  // TODO: retrieve any highlights for the current webpage 
+  // so we can render the highlights in the popup and/or content script
 }
 
 // all the good stuff happens here
