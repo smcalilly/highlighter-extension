@@ -4,17 +4,20 @@ function initializeAPI() {
   return clientAPI;
 }
 
-chrome.webNavigation.onDOMContentLoaded.addListener(async function(url) {
-  const clientAPI = initializeAPI();
-  console.log('dom content loaded')
+chrome.webNavigation.onDOMContentLoaded.addListener(function(url) {
 
-  console.log(url)
+  // we only want the current window to filter out advertising garbage
+  chrome.tabs.query({ active: true, currentWindow: true }, async function (tabs) { 
+    const clientAPI = initializeAPI();
 
-  // send request to see if token is still valid for current user
-  let currentPage = `url: ${url.url}`
-  const response = await clientAPI.getHighlightsForCurrentPage(currentPage);
+    console.log(tabs)
 
-  renderApp(response, clientAPI);
+    // send request to see if token is still valid for current user
+    let currentPage = `url: ${tabs[0].url}`
+    const response = await clientAPI.getHighlightsForCurrentPage(currentPage);
+
+    renderApp(response, clientAPI);
+  })
 }) 
 
 function renderApp(response, clientAPI) {
