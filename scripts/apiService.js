@@ -1,6 +1,6 @@
 class ApiService {
   constructor(token) {
-    this.domain = 'http://localhost:3000';
+    this.domain = 'https://www.highlighter.online';
     this.token = token;
     this.requestHeaders =  {
       'Access-Control-Allow-Origin': '*',

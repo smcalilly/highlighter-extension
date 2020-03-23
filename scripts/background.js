@@ -4,31 +4,6 @@ function initializeAPI() {
   return clientAPI;
 }
 
-chrome.webNavigation.onDOMContentLoaded.addListener(async function(url) {
-  const clientAPI = initializeAPI();
-  console.log('dom content loaded')
-
-  console.log(url)
-
-  // send request to see if token is still valid for current user
-  let currentPage = `url: ${url.url}`
-  const response = await clientAPI.getHighlightsForCurrentPage(currentPage);
-
-  renderApp(response, clientAPI);
-}) 
-
-function renderApp(response, clientAPI) {
-  // reset auth token
-  if (response.status !== 200) {
-    localStorage.setItem('highligtherJWT', null);
-    clientAPI.token = null;
-    // send message to popup with login state
-  }
-
-  // TODO: retrieve any highlights for the current webpage 
-  // so we can render the highlights in the popup and/or content script
-}
-
 // all the good stuff happens here
 async function createHighlight(textSelection) {
   const highlight = await formatHighlight(textSelection);
@@ -78,3 +53,28 @@ chrome.commands.onCommand.addListener(function (command) {
     });
   }
 });
+
+// background task to send request to api to 1) see if auth token is still valid
+// and 2) retrieve highlights for current webpage
+chrome.webNavigation.onDOMContentLoaded.addListener(async function(url) {
+  const clientAPI = initializeAPI();
+
+  // send request to see if token is still valid for current user
+  let currentPage = `url: ${url.url}`
+  const response = await clientAPI.getHighlightsForCurrentPage(currentPage);
+
+  renderApp(response, clientAPI);
+}) 
+
+// TODO: refactor this to handle app state in a better way
+function renderApp(response, clientAPI) {
+  // reset auth token
+  if (response.status !== 200) {
+    localStorage.setItem('highligtherJWT', null);
+    clientAPI.token = null;
+    // TODO: send message to popup with login state
+  }
+
+  // TODO: retrieve any highlights for the current webpage 
+  // so we can render the highlights in the popup and/or content script
+}

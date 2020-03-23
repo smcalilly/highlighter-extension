@@ -11,9 +11,12 @@ function captureLoginForm() {
   postLogin(loginForm);
 }
 
+
+// TODO: refactor this to use the apiService.js
+// TODO: refactor to handle auth state and rendering in a better way
 function postLogin(form) {
   const request = new XMLHttpRequest();
-  request.open('POST', 'http://www.localhost:3000/authenticate');
+  request.open('POST', 'https://www.highlighter.online/authenticate');
   request.setRequestHeader('Access-Control-Allow-Origin', '*');
   request.setRequestHeader('Accept', 'application/json');
   request.setRequestHeader('Content-Type', 'application/json');
