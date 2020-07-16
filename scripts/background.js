@@ -28,8 +28,10 @@ chrome.contextMenus.onClicked.addListener(function(textSelection) {
 });
 
 // redirect user to app's signup page upon download
-chrome.runtime.onInstalled.addListener(function() {
-  chrome.tabs.create({ url: 'https://www.highlighter.online/users/install' });
+chrome.runtime.onInstalled.addListener(function(reason) {
+  if (reason === 'install') {
+    chrome.tabs.create({ url: 'https://www.highlighter.online/users/install' });
+  }
 })
 
 // keyboard shortcut to save highlight

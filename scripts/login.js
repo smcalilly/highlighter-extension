@@ -54,9 +54,13 @@ function redirectToApp() {
 document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('sign-up').addEventListener('click', redirectToApp, false);
   document.getElementById('submit-button').addEventListener('click', captureLoginForm, false);
-  document.getElementById('login-form').onkeydown = function(e) {
-    if (e.keyCode == '13') {
-      captureLoginForm();
+
+  if (document.getElementById('login-form')) {
+    document.getElementById('login-form').onkeydown = function(e) {
+      if (e.keyCode == '13') {
+        captureLoginForm();
+      }
     }
   }
+  
 });

@@ -7,11 +7,21 @@
 <body>
 
 	<div id='app'>
-			<div id='login' class='flex-center-column page active'>
-					<div class='flex-center-column'>
-						<h1 class='banner'>Highlighter</h1>
-		
-						<form class='flex-center-column' id='login-form' role='login'>
+		<div class='flex-center-column'>
+			<h1 class='banner'>Highlighter</h1>
+				<div class='flex-center-column'>
+					<div id='loading' class='page active'>
+						loading...
+					</div>
+					<div id='highlights' class='page'>
+						No highlights for this page
+					</div>
+					<div id='loggedIn' class='page'>
+						logged in.
+					</div>
+	
+					<div class='page' id='login'>
+						<form class='flex-center-column' id='form' role='login'>
 							<div id='form'>
 								<input type='email' class='login' id='email' placeholder='email' required><br />
 								<input type='password' class='login' id='password' placeholder='password' required>
@@ -19,21 +29,22 @@
 							<br>
 							<button type='button' id='submit-button'>Login</button>
 						</form>
-
-						<div class='status' aria-live='polite'>
-								<div id='error' class='page'>
-									<p><strong>Bad username / password!</strong></p>
-								</div>
-								<div id='successful' class='page'>
-									<p><strong>Login successful!</strong></p>
-								</div>
-						</div>
-						<br />
-						<div>
-							<p><a id='sign-up' href='#signUp'>Sign up</a> to save your highlights.</p>
-						</div>
 					</div>
-			</div>
+
+					<div class='status' aria-live='polite'>
+							<div id='error' class='page'>
+								<p><strong>Bad username / password!</strong></p>
+							</div>
+							<div id='successful' class='page'>
+								<p><strong>Login successful!</strong></p>
+							</div>
+					</div>
+					<br />
+					<div>
+						<p><a id='sign-up' href='#signUp'>Sign up</a> to save your highlights.</p>
+					</div>
+				</div>
+		</div>
 	</div>
 
   <script src='/scripts/render.js'></script>
