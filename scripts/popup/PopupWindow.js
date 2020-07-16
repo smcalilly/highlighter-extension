@@ -95,7 +95,7 @@ class PopupWindow {
     PAGES[state].page.classList.add('active');
   }
 
-  determineAuthState() {
+  determineAuthStateAndRender() {
     if (localStorage.getItem('highlighterJWT')) {
       this.api.getHighlights().then((response) => {
         this.render('loggedIn')
@@ -108,10 +108,3 @@ class PopupWindow {
     }
   }
 }
-
-const popup = new PopupWindow()
-popup.render('loading')
-
-document.addEventListener('DOMContentLoaded', async function() {
-  popup.determineAuthState()
-});
