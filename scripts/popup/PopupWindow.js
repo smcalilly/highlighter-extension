@@ -23,7 +23,9 @@ class PopupWindow {
   render(state = 'login') {
     const PAGES = this.pages;
 
+    
     for (let page in PAGES) {
+      console.log('page', page)
       if (PAGES.hasOwnProperty(page)) {
         PAGES[page].page.classList.remove('active');
       }
@@ -38,10 +40,11 @@ class PopupWindow {
         this.render('loggedIn')
         return
       }).catch((error) => {
-        this.render('login')
         console.log('error', error)
         return
       })
+    } else {
+      this.render('login')
     }
   }
 }

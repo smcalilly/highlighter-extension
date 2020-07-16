@@ -72,7 +72,7 @@ chrome.webNavigation.onDOMContentLoaded.addListener(async function(url) {
 function renderApp(response, clientAPI) {
   // reset auth token
   if (response.status !== 200) {
-    localStorage.setItem('highligtherJWT', null);
+    localStorage.setItem('highlighterJWT', null);
     clientAPI.token = null;
     // TODO: send message to popup with login state
   }

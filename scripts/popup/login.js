@@ -38,13 +38,13 @@ function setAuthToken(response) {
 }
 
 function loginSuccessful(response) {
-  render('successful');
+  popup.render('successful');
   window.setTimeout(window.close, 1000);
 }
 
 function loginFailure() {
   document.getElementById('login-form').reset();
-  render('error');
+  popup.render('error');
 }
 
 function redirectToApp() {
