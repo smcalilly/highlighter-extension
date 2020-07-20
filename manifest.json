@@ -23,8 +23,6 @@
     "contextMenus",
     "storage",
     "notifications",
-    "activeTab",
-    "webNavigation",
     "https://www.highlighter.online/",
     "http://www.localhost:3000/*"
   ],
