@@ -56,27 +56,10 @@ chrome.commands.onCommand.addListener(function (command) {
   }
 });
 
-// background task to send request to api to 1) see if auth token is still valid
-// and 2) retrieve highlights for current webpage
-chrome.webNavigation.onDOMContentLoaded.addListener(async function(url) {
-  const clientAPI = initializeAPI();
-
-  // send request to see if token is still valid for current user
-  let currentPage = `url: ${url.url}`
-  const response = await clientAPI.getHighlightsForCurrentPage(currentPage);
-
-  renderApp(response, clientAPI);
-}) 
-
-// TODO: refactor this to handle app state in a better way
-function renderApp(response, clientAPI) {
-  // reset auth token
-  if (response.status !== 200) {
-    localStorage.setItem('highlighterJWT', null);
-    clientAPI.token = null;
-    // TODO: send message to popup with login state
-  }
-
-  // TODO: retrieve any highlights for the current webpage 
-  // so we can render the highlights in the popup and/or content script
-}
+// save the current page to local storage so the popup rendering
+// can request highlighter api to see if the user has any highlights for that page
+chrome.tabs.onActivated.addListener(function(activeInfo) {
+  chrome.tabs.get(activeInfo.tabId, function(currentTab) {
+    localStorage.setItem('hiPage', currentTab.url)
+  })
+});

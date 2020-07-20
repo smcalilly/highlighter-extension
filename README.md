@@ -3,6 +3,11 @@ This browser extension saves selected passages of text, or "highlights", while r
 
 Visit https://highlighter.online to see a demo.
 
-The code is a mess. It was one of my first vanilla JS apps. It has two parts:
-1) the background and content scripts, which contains all the heavy lifting logic.
-2) the popup, which is a basic UI for logging in and rendering login state.
+The code is a mess. It was one of my first vanilla JS apps and that was further compounded by working within the constraints of the browser extension APIs. 
+
+A browser extension has three parts:
+- **background scripts**: The logic for saving highlights lives here. I consider this "UI" because it handles how the user copies the text from the browser and displays messages via the browser's notifications.
+- **content scripts**: this allows the extension to interact with the DOM. When a user selects text, the content script executes and get the selected text. It sends this text to the background script. This is how the extension API is designed, where the scripts pass messages between each other.
+2) **popup scripts**:a basic UI for logging in and rendering login state. 
+
+The nature of a browser extension and it's limitations makes me inclined to keep each piece isolated. For instance, it's possible that I could "pass messages" via the extension API about the authentication state, between the background's API service and the popup. That creates some callback nastiness so I decided to repeat myself in some places. I don't know what the right approach is, but it doesn't matter because this is a low stakes project without the expectation of other maintainers beside myself. I'm making it up as I go, asking questions like, is it possible to do that/how do you do it? This was a prototype that I threw together over a couple of weeks and haven't maintained much since. This is the ugliest mess of procedural code. I've given myself more tech debt than I want to deal with if I were to make it better...I'd almost want to start from scratch, now that I know how browser extensions work. Basically, I'm making excuses for bad code !

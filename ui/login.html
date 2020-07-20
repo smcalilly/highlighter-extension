@@ -5,7 +5,6 @@
 </head>
 
 <body>
-
 	<div id='app'>
 		<div class='flex-center-column'>
 			<h1 class='banner'>Highlighter</h1>
@@ -16,12 +15,12 @@
 					<div id='highlights' class='page'>
 						No highlights for this page
 					</div>
-					<div id='loggedIn' class='page'>
-						logged in.
+					<div id='dashboard' class='page'>
+						<h2 class='highlights-header'>Highlights</h2>
 					</div>
 	
 					<div class='page' id='login'>
-						<form class='flex-center-column' id='form' role='login'>
+						<form class='flex-center-column' id='login-form' role='login'>
 							<div id='form'>
 								<input type='email' class='login' id='email' placeholder='email' required><br />
 								<input type='password' class='login' id='password' placeholder='password' required>
@@ -29,20 +28,18 @@
 							<br>
 							<button type='button' id='submit-button'>Login</button>
 						</form>
+						<div>
+							<p><a id='sign-up' href='#signUp'>Sign up</a> to save your highlights.</p>
+						</div>
 					</div>
 
-					<div class='status' aria-live='polite'>
-							<div id='error' class='page'>
-								<p><strong>Bad username / password!</strong></p>
-							</div>
-							<div id='successful' class='page'>
-								<p><strong>Login successful!</strong></p>
-							</div>
-					</div>
+						<div id='error' class='page status'>
+							<p><strong>Bad username / password!</strong></p>
+						</div>
+						<div id='successful' class='page status'>
+							<p><strong>Login successful!</strong></p>
+						</div>
 					<br />
-					<div>
-						<p><a id='sign-up' href='#signUp'>Sign up</a> to save your highlights.</p>
-					</div>
 				</div>
 		</div>
 	</div>

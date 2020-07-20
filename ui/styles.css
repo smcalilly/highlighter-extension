@@ -39,6 +39,10 @@ button:hover, button:focus {
   cursor: pointer;
 }
 
+#app {
+  width: 275px;
+}
+
 .page {
     display: none;
   }
@@ -93,12 +97,19 @@ button:hover, button:focus {
   background-color: #fcfc60;
   padding: 15px;
 }
-
-
   
 .flex-center-column {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.highlight {
+  padding: 8px;
+  margin: 8px;
+}
+
+.highlights-header {
+  text-align: center;
 }

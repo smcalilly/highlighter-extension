@@ -16,7 +16,7 @@ function captureLoginForm() {
 // TODO: refactor to handle auth state and rendering in a better way
 function postLogin(form) {
   const request = new XMLHttpRequest();
-  request.open('POST', 'https://www.highlighter.online/authenticate');
+  request.open('POST', 'http://localhost:3000/authenticate');
   request.setRequestHeader('Access-Control-Allow-Origin', '*');
   request.setRequestHeader('Accept', 'application/json');
   request.setRequestHeader('Content-Type', 'application/json');
@@ -44,7 +44,21 @@ function loginSuccessful(response) {
 
 function loginFailure() {
   document.getElementById('login-form').reset();
-  popup.render('error');
+  popup.pages.error.page.classList.add('active')
+  // PAGES[state].page.classList.add('active');
+  // popup.render('error');
+  // popup.render('login')
+  // if (document.getElementById('back-to-login')) {
+  //   document.addEventListener('DOMContentLoaded', function() {
+  //     console.log('back to login')
+  //     const backClick = () => {
+  //       console.log('back click')
+  //       popup.render('login')
+  //     }
+  //   document.getElementById('back-to-login').addEventListener('click', backClick, false)
+  //   })
+    
+  // }
 }
 
 function redirectToApp() {
@@ -54,7 +68,7 @@ function redirectToApp() {
 document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('sign-up').addEventListener('click', redirectToApp, false);
   document.getElementById('submit-button').addEventListener('click', captureLoginForm, false);
-
+  
   if (document.getElementById('login-form')) {
     document.getElementById('login-form').onkeydown = function(e) {
       if (e.keyCode == '13') {
@@ -62,5 +76,4 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }
   }
-  
 });

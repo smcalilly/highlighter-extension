@@ -1,6 +1,6 @@
 class ApiService {
   constructor(token) {
-    this.domain = 'https://www.highlighter.online';
+    this.domain = 'http://localhost:3000';
     this.token = token;
     this.requestHeaders =  {
       'Access-Control-Allow-Origin': '*',
@@ -8,6 +8,17 @@ class ApiService {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + this.token,
     };
+  }
+
+  parseResponseStatus(response) {
+    if (response.status === 201 || response.status === 200) {
+      return response
+    } else if (response.status === 401) {
+      throw Error('Invalid credentials.')
+    }
+    else {
+      throw Error('Something weird happened.')
+    }
   }
 
   async getHighlights() {
@@ -22,15 +33,16 @@ class ApiService {
   }
 
   async getHighlightsForCurrentPage(params) {
-    console.log(params)
-    const url = `${this.domain}/highlights/current?url=${params}`;
+    let currentPage = localStorage.getItem('hiPage')
+    
+    const url = `${this.domain}/highlights/current?url=${currentPage}`;
 
     const response = await fetch(url, {
       method: 'GET',
       headers: this.requestHeaders,
     });
 
-    return response;
+    return this.parseResponseStatus(response);
   }
 
   async postHighlight(requestBody) {
