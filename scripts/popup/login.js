@@ -39,26 +39,12 @@ function setAuthToken(response) {
 
 function loginSuccessful(response) {
   popup.render('successful');
-  window.setTimeout(window.close, 1000);
+  window.setTimeout(window.close, 2000);
 }
 
 function loginFailure() {
   document.getElementById('login-form').reset();
   popup.pages.error.page.classList.add('active')
-  // PAGES[state].page.classList.add('active');
-  // popup.render('error');
-  // popup.render('login')
-  // if (document.getElementById('back-to-login')) {
-  //   document.addEventListener('DOMContentLoaded', function() {
-  //     console.log('back to login')
-  //     const backClick = () => {
-  //       console.log('back click')
-  //       popup.render('login')
-  //     }
-  //   document.getElementById('back-to-login').addEventListener('click', backClick, false)
-  //   })
-    
-  // }
 }
 
 function redirectToApp() {
