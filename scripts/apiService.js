@@ -56,8 +56,4 @@ class ApiService {
   
     return response;
   }
-
-  async loginUser() {
-
-  }
 }
